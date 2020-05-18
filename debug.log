@@ -1,0 +1,4 @@
+[0501/133634.368:ERROR:process_info.cc(329)] VirtualQueryEx: Ingen tilgang. (0x5)
+[0501/133634.370:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[0501/133634.370:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[0501/133634.370:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Forsøkte å få tilgang til en avsluttende prosess. (0xc000010a)
