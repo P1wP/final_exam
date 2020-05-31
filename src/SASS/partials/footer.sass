@@ -1,0 +1,44 @@
+.footer
+    width: 100%
+    background-color: $darkBlue
+    color: $whiteBlue
+    border-radius: 0
+    margin-top: 100px
+
+    & .row
+        width: 100%
+
+    &__left
+        margin: 0 auto
+        width: 30%
+        & ul
+            padding: 0
+        & li
+            list-style: none
+            padding: 5px
+            & a
+                color: $whiteBlue
+                &:hover
+                    color: $lightBlue
+
+
+    &__right
+        text-align: center
+
+    &__icon
+        font-size: 2.5rem
+        color: $whiteBlue
+        margin-right: 35px
+        height: 50px
+        &:hover
+            color: $lightBlue
+
+    &__madeBy
+        text-align: center
+        color: $whiteBlue
+        width: 100%
+
+@media screen and (max-width: 1000px)
+    .footer
+        &__center
+            display: none  

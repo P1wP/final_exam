@@ -1,10 +1,14 @@
 import React, { useState, useEffect} from "react";
-import { BASE_URL, KEY, FETCH_OPTIONS} from "../../../constants/API";
+import { BASE_URL, FETCH_OPTIONS} from "../../../constants/API";
 import Spinner from "react-bootstrap/Spinner";
 import Search from "../search/Search";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
+
+import HotelDetails from "../hotels/HotelDetails";
+import HomeBanner from "./HomeBanner";
+import Footer from "../footer/Footer";
+
 
 
 function Home(){
@@ -14,23 +18,41 @@ function Home(){
 
     const hotelUrl = BASE_URL + "establishments";
 
+   
+
     useEffect(()=>{
+        if(localStorage.getItem("hotels")){
+            setHotels(JSON.parse(localStorage.getItem("hotels")));
+            setFilterdHotels(JSON.parse(localStorage.getItem("hotels")));
+            setLoading(false);
+        }
+        else{
         fetch(hotelUrl, FETCH_OPTIONS)
             .then(response => response.json())
             .then(json => { 
                 setHotels(json)
                 setFilterdHotels(json)
+                localStorage.setItem("hotels", JSON.stringify(json));
+                console.log(json)
             })
             .catch(error => console.log(error)) 
             .finally(() => setLoading(false));// END FETCH;
 
-        
-    }, [hotelUrl, FETCH_OPTIONS]);
-
+        }// END IF ELSE
+    }, [hotelUrl]);
+    
 
     const searchHotels = function(e){
         // VALUE FROM SEARCH INPUT
-        const searchValue = e.target.value.toLowerCase();
+        let searchValue;
+        if(e.length <= 0){
+            searchValue = "someThing";
+            //setFilterdHotels(hotels);
+        }
+        else{
+            searchValue = e[0].toLowerCase();
+        }
+        //const searchValue = e.target.value.toLowerCase();
         
 
         // CREATE NEW ARRAY FROM GAMES ARRAY
@@ -47,6 +69,9 @@ function Home(){
             return false;
         });
         setFilterdHotels(filteredArray);
+        if(filteredArray.length === 0){
+            setFilterdHotels(hotels);
+        }
         
     }
 
@@ -61,30 +86,31 @@ function Home(){
             </>
         );
     }
-  
     
+    function enableBtn(){
+        console.log("HOVER");
+    }
+
 
     return(
         <>
-        <h1>HOME</h1>
-        <Search  HandleSearch={searchHotels} filterd={filterdHotels} all={hotels}/>
+        <HomeBanner image={hotels[2].image}
+            search={<Search  HandleSearch={searchHotels} filterd={filterdHotels} all={hotels}/>}>
+        </HomeBanner>
+       
         <h2>Hotels </h2>
+        <Container>
+        <Row>
         {loading && <Spinner animation="border" className="spinner" />}
-            {hotels.map((hotel)=>(
-                <Row>
-                    <Col lg={2}>
-                        <div className="imageContainer">
-                        <Image className="imageTest" src={hotel.image}></Image>
-                        </div>
-                    <Image className="imageTest" src={hotel.image}></Image>
-                    </Col>
-                    <Col lg={4}>
-                        <p key={hotel.id}>{hotel.name}</p>
-                    </Col>
+            {filterdHotels.map((hotel)=>(
+                <HotelDetails onHover={enableBtn} key={hotel.id} hotel={hotel}/>
                     
-                
-                </Row>
+                           
         ))}
+
+        </Row>
+        </Container>
+        <Footer />
         </>
     );
 }

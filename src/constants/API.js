@@ -9,5 +9,7 @@ export const FETCH_OPTIONS = {
     },
 };
 
-// CONTACT
-export const ContactURL = BASE_URL + "contacts";
+export const ContactURL = BASE_URL + "/messages";
+
+// GOOGLE
+export const GKEY = "AIzaSyAqooP2LY3CXbQFDrfjra_d8qoNpjXLLjk";

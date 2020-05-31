@@ -1,0 +1,41 @@
+.navbar
+    z-index: 10
+    &__btn
+        &--link
+            color: white !important
+            transition: .5s
+            &.active
+                color: black !important
+
+    &__logo
+        &--img
+            background-image: url('../../images/logo/logoWhite.png')
+            background-position: center
+            background-repeat: no-repeat
+            background-size: contain
+            height: 50px
+            width: 100%
+            min-width: 100px
+            transition: .5s
+                   
+    &:hover 
+        background-color: #d1d0d0bb
+        transition: 1s
+        .navbar__logo
+            &--img
+                background-image: url('../../images/logo/logoColor.png')
+                transition: 1s
+        .navbar__btn
+            &--link
+                color: #b521da !important
+                margin-right: 15px
+                transition: 1s
+                &:hover
+                    border-bottom: 1px solid black
+                &.active
+                    color: black !important
+                    &:hover
+                        border-bottom: 1px solid #b521da
+      
+
+    
