@@ -11,59 +11,50 @@ function minDigits(number) {
     return number;
 }
 
-// GET LOCATION
-function GetLocation(string, lat, lng){
-    Geocode.setApiKey(GKEY);
-
-    // IF COORDINATES
-    if(!string){
-        Geocode.fromLatLng(lat, lng).then(
-            response => {
-                const address = response.results[0].formatted_address;
-                console.log(address);
-                return address
-            },
-            error => {
-                console.log(error);
-            }
-            
-        )
-    }
-
-    // IF STRING
-    Geocode.fromAddress(string).then(
-        response => {
-            const {lat, lng} = response.results[0].geometry.location;
-            console.log(lat, lng);
-        },
-        error=>{
-            console.error();
-            
-        }
-        
-    )
-}
 
 function Location({hotel, address}){
+    Geocode.setApiKey(GKEY);
 
     const [ location, setLocation ] = useState();
     useEffect(()=>{
     if(!address){
         const stringLat = minDigits(hotel.lat.toString());
         const stringLng = minDigits(hotel.lng.toString());
-        console.log(stringLat, stringLng);
-        setLocation(GetLocation(false, stringLat, stringLng));
+        
+        Geocode.fromLatLng(stringLat, stringLng).then(
+            response => {
+                const address = response.results[0].formatted_address;
+                console.log(address);
+                setLocation(address);
+            },
+            error => {
+                console.log(error);
+            }
+            
+        )
         
     }
     else(
-        console.log("address")
+        Geocode.fromAddress(address).then(
+            response => {
+                const {lat, lng} = response.results[0].geometry.location;
+                console.log(lat, lng);
+                setLocation([lat, lng])
+                
+            },
+            error=>{
+                console.error();
+                
+            }
+            
+        )
     )
     }, []);
     
     console.log(location);
     return(
 
-        <p>Address: {location} </p>
+        <p><strong>Address:</strong> {location} </p>
 
     );
     

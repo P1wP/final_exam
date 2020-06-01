@@ -1,4 +1,5 @@
 import  React, { useState }  from "react";
+import {BASE_URL, headers} from "../../../constants/API";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Button from "react-bootstrap/Button";
@@ -39,7 +40,8 @@ const schema = yup.object().shape({
        
 });
 
-function EnquiryForm(){
+function EnquiryForm(id){
+
     const [validated, setValidated] = useState(false);
     const { register, handleSubmit, errors} = useForm({
         validationSchema: schema 
@@ -47,7 +49,24 @@ function EnquiryForm(){
 
     function onSubmit(data){
         // SEND DATA TO API
-        console.log( data );
+        console.log(id);
+        const test = id.value;
+        console.log(test);
+        const sendData = {
+            name: data.name,
+            email: data.email,
+            establishmentId: id["id"],
+            checkIn: data.checkIn.toDateString(),
+            checkOut: data.checkOut.toDateString(),
+        };
+
+        const url = BASE_URL + "enquiries";
+        const options = { headers, method: "POST", body: JSON.stringify(sendData) };
+        fetch(url, options)
+            .then((r) => r.json())
+            .then((j) => console.log(j));
+
+        console.log(sendData);
         setValidated(true);
     }
 
@@ -88,7 +107,7 @@ function EnquiryForm(){
 
     // ON VALIDATION RETURN THIS
     return(
-        <ValidMessage message="Enquiry sent :) "></ValidMessage>
+        <ValidMessage />
     );
     
 }

@@ -1,12 +1,12 @@
 import React, { useState, useEffect} from "react";
 
 import { GetContact } from "../../../constants/MessageFunctions";
-import { ContactURL, FETCH_OPTIONS } from "../../../constants/API";
+import { ContactURL, headers } from "../../../constants/API";
 
 
 function Messages(){
     const [ messages, setMessages ] = useState([]);
-
+    const FETCH_OPTIONS = {headers};
     
     useEffect(() => {
         // FETCH MSGs

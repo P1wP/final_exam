@@ -53,8 +53,8 @@ function DetailsInfo({hotel}){
             <Row>
                 <Col className="DetailsInfo__Contact" sm={12} md={4}>
                     <h3>Contact</h3>
-                    <p>Phone: #123 456 789</p>
-                    <p>Email: <span>{hotel.email}</span></p>
+                    <p><strong>Phone:</strong> #123 456 789</p>
+                    <p><strong>Email:</strong> {hotel.email}</p>
                     <Location hotel={hotel} />
                 </Col>
                 <Col className="DetailsInfo__Map" sm={12} md={8}>

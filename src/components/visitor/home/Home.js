@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { BASE_URL, FETCH_OPTIONS} from "../../../constants/API";
+import { BASE_URL, headers} from "../../../constants/API";
 import Spinner from "react-bootstrap/Spinner";
 import Search from "../search/Search";
 import Row from "react-bootstrap/Row";
@@ -17,7 +17,7 @@ function Home(){
     const [filterdHotels, setFilterdHotels] = useState([]);
 
     const hotelUrl = BASE_URL + "establishments";
-
+    const FETCH_OPTIONS = {headers};
    
 
     useEffect(()=>{
@@ -98,8 +98,8 @@ function Home(){
             search={<Search  HandleSearch={searchHotels} filterd={filterdHotels} all={hotels}/>}>
         </HomeBanner>
        
-        <h2>Hotels </h2>
-        <Container>
+        
+        <Container id="homeContent">
         <Row>
         {loading && <Spinner animation="border" className="spinner" />}
             {filterdHotels.map((hotel)=>(

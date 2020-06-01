@@ -22,7 +22,7 @@ function EnquiryModal({hotel}){
                 <Modal.Title>{hotel.name} Enquiry</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <EnquiryForm></EnquiryForm>
+                <EnquiryForm id={hotel.id}></EnquiryForm>
             </Modal.Body>
 
         </Modal>

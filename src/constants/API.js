@@ -2,11 +2,9 @@ export const BASE_URL = "https://us-central1-noroff-final-exam.cloudfunctions.ne
 
 export const KEY = "5ea817623851a633426eb7cc";
 
-export const FETCH_OPTIONS = {
-    headers: {
-      "Content-Type": "application/json",
-      key: KEY,
-    },
+export const headers = {
+  "Content-Type": "application/json",
+  key: KEY,
 };
 
 export const ContactURL = BASE_URL + "/messages";

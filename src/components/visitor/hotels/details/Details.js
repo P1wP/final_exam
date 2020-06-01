@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { BASE_URL, FETCH_OPTIONS} from "../../../../constants/API";
+import { BASE_URL, headers} from "../../../../constants/API";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 
@@ -22,6 +22,7 @@ function Details(){
     
 
     const hotelUrl = BASE_URL + "establishments/" + id;
+    const FETCH_OPTIONS = {headers};
 
     useEffect(()=>{
         // LOCAL?

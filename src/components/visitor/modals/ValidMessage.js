@@ -1,8 +1,11 @@
 import React from "react";
 
-function ValidMessage({ message }) {
+function ValidMessage() {
     return (
-        <h1> { message } </h1>
+        <div className="formSuccess">
+            <h1 className="formSuccess__headline"> Success!  </h1>
+            <p className="formSuccess__msg">We'll get back too you as soon as possible ;)</p>
+        </div>
     );
 }
 
