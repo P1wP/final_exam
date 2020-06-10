@@ -18,7 +18,7 @@ function MobileMessageDetails({msg}){
                     <h4>{msg.message}</h4>
                     
                     <div className="messageContainer__delete">
-                        <MessageDelete id={msg.id}></MessageDelete>
+                        <MessageDelete msgId={msg.id}></MessageDelete>
                     </div>
                     </div>
                 </Col>

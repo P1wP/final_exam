@@ -35,22 +35,32 @@
 
 // MOBILE ONLY COMPONENT
 .messageContainer
-    background: blue
+    color: $white
     &:hover
         .messageContainer__info
-            background: red
+            background: $gray
             transition: $transitionSpeed
-     
+        .messageContainer__message
+            top: 0px
+            left: 0
+            height: auto
+            transition: $transitionSpeed
+    &__info
+        display: flex
+        height: 50px
+        &--from
+            width: 50%
+
 .messageContainer__message
     position: relative
     top: 0px
+    left: 3000px
     height: 0px
-    margin-bottom: 50px
     overflow: hidden
-    background: #ffffff
+    
     transition: $transitionSpeed
-.messageContainer__info
-    &:hover + .messageContainer__message
+.messageContainer
+    &:hover ~ .messageContainer__message
         height: auto
         top: 0
 
