@@ -33,12 +33,37 @@
             &:hover
                 font-size: 1rem
 
-@media screen and ( max-width: 832px )
-    .messagesMsg, .enquiriesMsg
-        dcolor: blue
+// MOBILE ONLY COMPONENT
+.messageContainer
+    background: blue
+    &:hover
+        .messageContainer__info
+            background: red
+            transition: $transitionSpeed
+     
+.messageContainer__message
+    position: relative
+    top: 0px
+    height: 0px
+    margin-bottom: 50px
+    overflow: hidden
+    background: #ffffff
+    transition: $transitionSpeed
+.messageContainer__info
+    &:hover + .messageContainer__message
+        height: auto
+        top: 0
+
+@media screen and ( max-width: 430px )
     
-    .messages__list--item
+    .messages__list
+        background: blue
         &:hover
-            color: red
             .messagesMsg
-                color: green
+                background: red
+                opacity: 1
+                height: auto
+                transition: 1s
+    .messagesMsg
+        height: 0px
+        overflow: hidden

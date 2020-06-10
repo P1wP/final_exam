@@ -97,6 +97,7 @@ function Home(){
     return(
         <>
         <div>
+        {loading && <Spinner animation="border" className="spinner" />}
         <HomeBanner image={hotels[2].image}
             search={<Search  HandleSearch={searchHotels} filterd={filterdHotels} all={hotels}/>}>
         </HomeBanner>

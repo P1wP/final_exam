@@ -11,6 +11,7 @@ import {
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MessagesDetails from "./MessagesDetails";
+import MobileMessageDetails from "./mobile/MobileMessageDetails";
 
 function MessagesItem(){
     const [ messages, setMessages ] = useState([]);
@@ -50,15 +51,15 @@ function MessagesItem(){
 
     return(
         <Row>
+            {isBrowser &&
             <Col sm={12}>
                 <div className="messages__list">
-                    <div className="messages__list--info">
+                    <Col sm={12} className="messages__list--info">
                         <div className="messages__list--info--from">FROM</div>
                         <div className="messages__list--info--email">DATE</div>
-                    </div>
+                    </Col>
                     {messages.map((message)=>(
-                        <>
-                        <div className="messages__list--item" onClick={() => toggleShow(message, true, false, false)}>
+                        <Col sm={12} className="messages__list--item" onClick={() => toggleShow(message, true, false, false)}>
                             <div className="messages__list--item--name">
                                 <p key={message.id}>{message.name}</p>
                             </div>
@@ -66,12 +67,23 @@ function MessagesItem(){
                                 <p key={message.id}>{time(message.createdAt)}</p>
                             </div>
                             
-                        </div>  
-                        {isMobile && <MessagesDetails message={message} />}
-                        </>
+                        </Col>  
                     ))}
                     </div>
             </Col>
+}
+            
+            {isMobile && 
+                <Col sm={12}>
+                    <div className="messages__list--info--from">FROM</div>
+                    <div className="messages__list--info--email">DATE</div>
+                {messages.map((message)=>(
+                    <MobileMessageDetails  key={message.id} msg={message}/>
+                       
+                               
+            ))}
+                </Col>
+            }
       
         </Row>
         

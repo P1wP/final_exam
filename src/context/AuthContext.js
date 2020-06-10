@@ -5,7 +5,7 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) =>{
 
     // LOGIN
-    const [ login, setLogin ] = useState(true);
+    const [ login, setLogin ] = useState(false);
     
     function signIn( username, password) {
         const cred = {
@@ -16,6 +16,7 @@ const AuthContextProvider = ({ children }) =>{
             setLogin(true);
             return
         }
+        
         return
     }
 
