@@ -15,7 +15,7 @@ function DetailsInfo({hotel}){
     return(
         <div className="DetailsInfo">
             <Row>
-                <Col className="DetailsInfo__Title offset-md-3" sm={12} md={5}>
+                <Col className="DetailsInfo__Title offset-md-3" sm={12} md={6}>
                     <h2>{hotel.name}</h2>
                 </Col>
                 
@@ -44,7 +44,7 @@ function DetailsInfo({hotel}){
                 </Col>
             </Row>
             <Row className="DetailsInfo__Utilities">
-                <Col sm={12}>
+                <Col sm={12} >
                     <h3 className="DetailsInfo__Utilities--title">Utilities</h3>
                 </Col>
                 <DetailsUtil/> 

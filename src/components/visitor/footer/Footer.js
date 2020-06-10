@@ -41,8 +41,9 @@ function Footer(){
                         </a>
 
                     </div>
+                    
                 </Col>
-                
+              
             </Row>
             <p className="footer__madeBy">Holidaze &copy; {year}</p>
         </FooterBS>

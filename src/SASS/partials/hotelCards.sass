@@ -4,7 +4,8 @@ $transitionSpeed: .5s
 // DISTANCE
 $distance: 120px
 #homeContent
-    margin-top: 300px
+   position: relative
+   top: 0
     // SET MEDIA QUERIES
 
 .hotelContainer
@@ -21,10 +22,12 @@ $distance: 120px
             height: 100%
             background: #ffffff
             transition: $transitionSpeed
-            &--btns button
+        .hotelContainer__btns
+            & button
                 top: 0px
                 opacity: 1
                 transition: $transitionSpeed
+            
     
 
 .hotelContainer__img
@@ -45,8 +48,8 @@ $distance: 120px
         min-height: 50%
         max-height: 60%
         overflow: hidden
-    &--btns
-        button
+.hotelContainer__btns
+    & button
             height: 50px
             width: 100%
             margin-bottom: 5px
@@ -54,4 +57,25 @@ $distance: 120px
             position: relative
             top: $distance
             opacity: 0
-     
+    &--details
+        background-color: $gray
+        color: $black
+        font-size: 1rem
+        border-color: $gray
+        &:hover
+            background-color: $gray
+            border-color: $gray
+            color: $black
+            font-size: 1.5rem
+    &--enquiry
+        background: $purple
+        border-color: $purple
+        color: $white
+        font-size: 1rem
+        width: 100%
+        height: 50px
+        &:hover
+            background: $purple
+            border-color: $purple
+            color: $white
+            font-size: 1.5rem

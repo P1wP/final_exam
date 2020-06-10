@@ -17,9 +17,10 @@ function Search({HandleSearch, filterd, all}){
     const hotels = [];
     for(let i = 0; i< filterd.length; i++){
         hotels.push(filterd[i].name)
+        hotels.push(filterd[i].id)
     }
     
-    // REMOVE TYPEAHED ON CLICK
+    /* REMOVE TYPEAHED ON CLICK
     function hideType(){
         setTypeAhead(false);
         console.log(typeAhead);
@@ -29,7 +30,7 @@ function Search({HandleSearch, filterd, all}){
         setTypeAhead(true);
         console.log(typeAhead);
     };
-
+    */
 
     return(
         <div id="searchContainer">
@@ -40,7 +41,10 @@ function Search({HandleSearch, filterd, all}){
                 options={hotels}
                 maxVisible={2}
                 labelKey={hotels.name}
-                onChange={(selected) => HandleSearch(selected)}
+                onChange={(value) => HandleSearch(value)}
+                onInputChange={(value) => HandleSearch(value)}
+                selectHintOnEnter={true}
+                
             />
 
         </div>

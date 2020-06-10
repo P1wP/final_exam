@@ -45,12 +45,14 @@ function Home(){
     const searchHotels = function(e){
         // VALUE FROM SEARCH INPUT
         let searchValue;
+        
         if(e.length <= 0){
             searchValue = "someThing";
             //setFilterdHotels(hotels);
         }
         else{
             searchValue = e[0].toLowerCase();
+            console.log(searchValue);
         }
         //const searchValue = e.target.value.toLowerCase();
         
@@ -94,10 +96,11 @@ function Home(){
 
     return(
         <>
+        <div>
         <HomeBanner image={hotels[2].image}
             search={<Search  HandleSearch={searchHotels} filterd={filterdHotels} all={hotels}/>}>
         </HomeBanner>
-       
+        </div>
         
         <Container id="homeContent">
         <Row>

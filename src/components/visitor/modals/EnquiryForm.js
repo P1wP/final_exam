@@ -3,6 +3,8 @@ import {BASE_URL, headers} from "../../../constants/API";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/FormGroup";
 import ErrorMessage from "./ErrorMessage";
@@ -31,13 +33,7 @@ const schema = yup.object().shape({
     checkOut: yup
         .date("please select a date")
         .min( yup.ref("checkIn"), "Check-out can not be before Check-in")
-        .typeError("Please select a date")
-        
- 
-        
-        
-        // https://stackoverflow.com/questions/57985475/yup-how-to-validate-two-dates-which-are-dependent-on-each-other
-       
+        .typeError("Please select a date")     
 });
 
 function EnquiryForm(id){
@@ -74,33 +70,37 @@ function EnquiryForm(id){
     if(!validated){
         return(
             <Form className="enquiryForm" onSubmit={handleSubmit(onSubmit)}>
-                
+                <Row>
+                <Col sm={12}>
                     <FormGroup className="enquiryForm__name">
                     <Form.Label className="enquiryForm__name--label">Full Name</Form.Label>
-                        <input className="enquiryForm__name--input" type="text" name="name" placeholder="Full name" ref={register}></input>
+                        <input className="enquiryForm__name--input" type="text" name="name" placeholder="Enter your full name" ref={register}></input>
                         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
                     </FormGroup>
-    
+                    </Col>
+                    <Col sm={12}>
                     <FormGroup className="enquiryForm__email">
                     <Form.Label className="enquiryForm__email--label">Email</Form.Label>
-                        <input className="enquiryForm__email--input" type="email" name="email" placeholder="Email" ref={register}></input>
+                        <input className="enquiryForm__email--input" type="email" name="email" placeholder="Enter your Email" ref={register}></input>
                         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                     </FormGroup>
-    
+                    </Col>
+                    <Col sm={12} md={6}>
                     <FormGroup className="enquiryForm__date">
                     <Form.Label className="enquiryForm__date--label">Check-In</Form.Label>
                         <input className="enquiryForm__date--input" type="date" name="checkIn" ref={register}></input>
                         {errors.checkIn && <ErrorMessage>{errors.checkIn.message}</ErrorMessage>}
                     </FormGroup>
-    
+                    </Col>
+                    <Col sm={12} md={6}>
                     <FormGroup className="enquiryForm__date">
                     <Form.Label className="enquiryForm__date--label">Check-out</Form.Label>
                         <input className="enquiryForm__date--input" type="date" name="checkOut" ref={register}></input>
                         {errors.checkOut && <ErrorMessage>{errors.checkOut.message}</ErrorMessage>}
                     </FormGroup>
-    
+                    </Col>
                     <Button className="enquiryForm__btn" type="submit">Send</Button>
-               
+                </Row>
             </Form>
         );
     }

@@ -22,10 +22,10 @@ function HotelDetails({hotel}){
                     <h4>{hotel.name}</h4>
                     <p>Maximum Guests: {hotel.maxGuests}</p>
                     <p>Price for 1 night from: {hotel.price}$</p>
-                    <div className="hotelContainer__info--btns">
+                    <div className="hotelContainer__btns">
 
                         <Link to={"/hotel/" + hotel.id}>
-                            <Button className="Details">Details</Button>
+                            <Button className="hotelContainer__btns--details">Details</Button>
                         </Link>
                         
                         <EnquiryModal hotel={hotel}></EnquiryModal>

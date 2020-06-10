@@ -11,7 +11,7 @@ function EnquiryModal({hotel}){
 
     return(
         <>
-        <Button  className="enquiryBtn" variant="primary" onClick={handleShow}>
+        <Button  className="hotelContainer__btns--enquiry" variant="primary" onClick={handleShow}>
             Enquier        
         </Button>
 

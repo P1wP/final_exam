@@ -4,16 +4,26 @@ import BannerHome from "../../../images/bannerHome.jpg";
 
 
 function HomeBanner({search, image}){
+
+    const ImageStyle = {
+        backgroundImage: 'url(' + image + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+    };
+
+
     return(
-        <div id="homeBanner" className="container-fluid">
-            <h1 id="homeBanner__title">Find B&B's, Guesthouses <br/> & <br/> Hotels in Bergen</h1>
-            <img id="homeBanner__image" src={BannerHome} alt="Featured"></img>
-            <Container>
+        <div id="homeBanner" className="container-fluid" style={ImageStyle}>
+            <Container className="homeContainer">
+                
+            <h1 className="homeContainer--text">Find B&B's, Guesthouses <br/> & <br/> Hotels in Bergen</h1>
+            
                 {search}
             </Container>
         </div>
     );
 
 }
-
+//<img id="homeBanner__container--image" src={image} alt="Featured"></img>
 export default HomeBanner;
