@@ -21,15 +21,9 @@ function MessagesDetails({message}){
                    
                 <Col sm={12} className="messagesMsg__sender">
                     <Row>
-                    <Col sm={6} className="messagesMsg__sender--name">
+                    <Col sm={12} className="messagesMsg__sender--name">
                         <p><strong>Name: </strong>{message.name}</p>
                     </Col>
-
-                    {isBrowser &&  
-                        <Col sm={6} className="messagesMsg__sender--id text-right">
-                            <p><strong>Id: </strong>{message.id}</p>
-                        </Col>
-                    }
                     
                     <Col sm={12} className="messagesMsg__sender--email">
                         <p><strong>Email: </strong>{message.email}</p>

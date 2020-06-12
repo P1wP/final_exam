@@ -1,20 +1,18 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useContext, useState, useEffect} from "react";
+import { AuthContext } from "../../../../../context/AuthContext";
+import { BASE_URL, headers } from "../../../../../constants/API";
 import {
-    BrowserView,
-    MobileView,
     isBrowser,
     isMobile
   } from "react-device-detect";
-import { AuthContext } from "../../../../../context/AuthContext";
-import { BASE_URL, headers } from "../../../../../constants/API";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import EnquiriesDetails from "./EnquiriesDetails";
+import MobileEnquiriesDetails from "./mobile/MobileEnquiriesDetails";
 
 function EnquiriesItem(){
     const [ messages, setMessages ] = useState([]);
-    const [ clickedMsg, setClickedMsg ] = useState(null);
-    const { toggleShow } = useContext(AuthContext);
+    const { hotelChange, toggleShow } = useContext(AuthContext);
 
     const FETCH_OPTIONS = {headers};
     const url = BASE_URL + "enquiries";
@@ -28,9 +26,10 @@ function EnquiriesItem(){
             .catch(error => console.log(error)) // END FETCH;
 
         
-    }, [url]);
+    }, [hotelChange]);
     
     console.log(messages)
+
 
     // SHOW UNREAD
         //GET LENGTH OF MESSAGES
@@ -41,31 +40,49 @@ function EnquiriesItem(){
                 // FONT STYLE REGULAR
             // ELSE
                 // FONTSYLE BOLD
-
+    function time(date){
+        const old = new Date(date);
+        return old.toDateString();  
+    }
 
     return(
         <Row>
+            {isBrowser &&
             <Col sm={12}>
-                <div className="enquiries__list">
-                    <div className="enquiries__list--info">
-                        <div className="enquiries__list--info--from">FROM</div>
-                        <div className="enquiries__list--info--email">EMAIL</div>
-                    </div>
+                <div className="messages__list">
+                    <Col sm={12} className="messages__list--info">
+                        <div className="messages__list--info--from">FROM</div>
+                        <div className="messages__list--info--email">DATE</div>
+                    </Col>
                     {messages.map((message)=>(
-                        <>
-                        <div key={message.id} className="enquiries__list--item" onClick={() => toggleShow(message, false, true, false)}>
-                            <div className="enquiries__list--item--name">
+                        <Col sm={12} className="messages__list--item" onClick={() => toggleShow(message, false, true, false)}>
+                            <div className="messages__list--item--name">
                                 <p key={message.id}>{message.name}</p>
                             </div>
-                            <div className="enquiries__list--item--email">
-                                <p key={message.id}>{message.email}</p>
+                            <div className="messages__list--item--time">
+                                <p key={message.id}>{time(message.createdAt)}</p>
                             </div>
-                        </div>  
-                        {isMobile && <EnquiriesDetails message={message} />}
-                        </>
+                            
+                        </Col>  
                     ))}
                     </div>
             </Col>
+}
+            
+            {isMobile && 
+                <Col sm={12}>
+                    <Col sm={12} className="messages__list--info">
+                        <div className="messages__list--info--from">FROM</div>
+                        <div className="messages__list--info--email">DATE</div>
+                    </Col>
+                {messages.map((message)=>(
+                    <MobileEnquiriesDetails  key={message.id} msg={message}/>
+                       
+                               
+            ))}
+                </Col>
+            }
+      
         </Row>
         
     );

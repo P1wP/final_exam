@@ -2,21 +2,17 @@ import React, { useContext, useState, useEffect} from "react";
 import { AuthContext } from "../../../../../context/AuthContext";
 import { BASE_URL, headers } from "../../../../../constants/API";
 import {
-    BrowserView,
-    MobileView,
     isBrowser,
     isMobile
   } from "react-device-detect";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import MessagesDetails from "./MessagesDetails";
 import MobileMessageDetails from "./mobile/MobileMessageDetails";
 
 function MessagesItem(){
     const [ messages, setMessages ] = useState([]);
-    const [ clickedMsg, setClickedMsg ] = useState(null);
-    const { toggleShow } = useContext(AuthContext);
+    const { hotelChange,  toggleShow } = useContext(AuthContext);
 
     const FETCH_OPTIONS = {headers};
     const url = BASE_URL + "contacts";
@@ -30,20 +26,11 @@ function MessagesItem(){
             .catch(error => console.log(error)) // END FETCH;
 
         
-    }, [url]);
+    }, [hotelChange]);// END USEEFFECT
     
     console.log(messages)
 
 
-    // SHOW UNREAD
-        //GET LENGTH OF MESSAGES
-        //GET MESSAGES IN STORAGE
-            // NUMBER UNREAD === LENGTH - STORAGE
-        // CHECK IF MESSAGE ID IS IN STORAGE
-            // IF STORAGE
-                // FONT STYLE REGULAR
-            // ELSE
-                // FONTSYLE BOLD
     function time(date){
         const old = new Date(date);
         return old.toDateString();  
@@ -75,8 +62,10 @@ function MessagesItem(){
             
             {isMobile && 
                 <Col sm={12}>
-                    <div className="messages__list--info--from">FROM</div>
-                    <div className="messages__list--info--email">DATE</div>
+                    <Col sm={12} className="messages__list--info">
+                        <div className="messages__list--info--from">FROM</div>
+                        <div className="messages__list--info--email">DATE</div>
+                    </Col>
                 {messages.map((message)=>(
                     <MobileMessageDetails  key={message.id} msg={message}/>
                        

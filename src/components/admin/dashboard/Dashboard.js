@@ -24,13 +24,15 @@ function Dashboard(){
         <div id="dashboardPage">
         <div className="container">
             <Row className="dashboard">
-                <Col sm={5} className="dashboard__content container">
-                    <Messages />
-                    <Enquiries />
-                    <Establishments />
+               
+                <Col sm={12} md={8} lg={6} className="dashboard__content container">
+                        <Messages />
+                        <Enquiries />
+                        <Establishments />
                 </Col>
+                
                 {isBrowser && 
-                    <Col sm={7}>
+                    <Col sm={12} md={8} lg={6} className="offset-md-2 offset-lg-0">
                         {msg && <MessagesDetails message={props}/>}
                         {est && <EstablishmentsItem establishment={props}/>}
                         {enq && <EnquiriesDetails message={props}/>}

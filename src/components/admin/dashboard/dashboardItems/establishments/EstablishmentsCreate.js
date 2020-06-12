@@ -7,14 +7,12 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-
-import EstablishmentsDelete from "./EstablishmentsDelete";
 import EstablishmentsCancel from "./EstablishmentsCancel";
 
 import { BASE_URL, headers } from "../../../../../constants/API";
 import ErrorMessage from "../../../formValidation/ErrorMessage";
 import ValidMessage from "../../../formValidation/ValidMessage";
-import Establishments from "./Establishments";
+
 
 
 const schema = yup.object().shape({
@@ -27,13 +25,16 @@ const schema = yup.object().shape({
 		.min(8, "Wrong Username or Password")
         .required("Password is required"),
     price: yup
-        .string()
+        .number()
         .min(10, "minimum price is 10$")
         .required("Price is required"),
     guests: yup
-        .string()
+        .number()
         .min(1, "Minimum number of guests MUST be ONE(1)")
         .required("Maximum Guests is Required"),
+    catering: yup
+        .string()
+        .required("Catering is required"),
     lat: yup
         .string()
         .max(20,"Latitude is too long")
@@ -55,6 +56,10 @@ const schema = yup.object().shape({
 
 
 function EstablishmentsCreate(){
+
+    const [catering, setCatering ] = useState(true);
+    const [validated, setValidated] = useState(false);
+
     
     const { register, handleSubmit, errors} = useForm({
         validationSchema: schema,
@@ -63,12 +68,44 @@ function EstablishmentsCreate(){
         
     });
 
-    
+    function handelLabel(event){
+        
+        if(event.target.value === "false"){
+            setCatering(false);
+        }
+        else{
+            setCatering(true);   
+        }
 
+    }
+    useEffect(()=>{
+        console.log("useEffect: " + catering);
+    },[catering])
 
     // GET FORM VALUES
     function onSubmit(data){
-        console.log(data);
+        console.log(data)
+        const newEstablishment = {
+            name: data.name,
+            email: data.email,
+            price: data.price,
+            maxGuests: data.guests,
+            lat: data.lat,
+            lng: data.lng,
+            image: data.image,
+            description: data.description,
+            selfCatering: catering
+        };
+        console.log(newEstablishment)
+        
+        const url = BASE_URL + "establishments";
+        const options = { headers, method: "POST", body: JSON.stringify(newEstablishment) };
+
+        // send every
+        fetch(url, options)
+            .then((r) => r.json())
+            .then((j) => console.log(j));
+            setValidated(true);
 
     }
 
@@ -102,7 +139,7 @@ function EstablishmentsCreate(){
                 <Form.Group className="establishmentForm__price">
                     <Form.Label className="establishmentForm__price--label">Price for 1 guest</Form.Label>
                     <Form.Control   className="establishmentForm__price--input" 
-                                    type="text" 
+                                    type="number" 
                                     name="price" 
                                     placeholder="Price for 1 guest"
                                     ref={register} />
@@ -126,7 +163,8 @@ function EstablishmentsCreate(){
                                 name="catering"
                                 type="radio"
                                 label="YES"
-                                checked = {true}
+                                value = "true"
+                                onChange={handelLabel}
                                 ref={register}
                             />
 
@@ -135,8 +173,11 @@ function EstablishmentsCreate(){
                                 name="catering"
                                 type="radio"
                                 label="NO"
+                                value = "false"
+                                onChange={handelLabel}
                                 ref={register}
                             />
+                            {errors.catering && <ErrorMessage>{errors.catering.message}</ErrorMessage>}
                 </Form.Group>
 
                 <Form.Group className="establishmentForm__latitude">
@@ -179,12 +220,14 @@ function EstablishmentsCreate(){
                     {errors.description && <ErrorMessage>{errors.description.message}</ErrorMessage>}
                 </Form.Group>
                 <Row className="establishmentForm__row">
+                {validated && <ValidMessage><p>Establishment successfuly create</p></ValidMessage>}
                     <Col xs={12} sm={6} className="establishmentForm__btn">
                     <Button className="establishmentForm__btn--save" type="submit">SAVE</Button> 
                     </Col>
                     <Col xs={12} sm={6} className="establishmentForm__btn">
                         <EstablishmentsCancel classname="establishmentForm__btn--cancel" />
                     </Col>
+                    
                 </Row>
             </Form>
         </Container> 

@@ -47,7 +47,11 @@ const schema = yup.object().shape({
 
 
 function EstablishmentsDetails({establishment}){
-    console.log(establishment)
+
+    const [hotelChange, setHotelChange, catering, setCatering ] = useState(true);
+    const [valid, setValid ] = useState(false);
+    const [checked, setChecked ] = useState(establishment.selfCatering);
+
     const { register, handleSubmit, errors} = useForm({
         validationSchema: schema,
         //https://react-hook-form.com/api/
@@ -64,13 +68,54 @@ function EstablishmentsDetails({establishment}){
           }
     });
 
-
-    // GET FORM VALUES
-    function onSubmit(data){
-        console.log(data);
+    // HANDEL FORM RADIO BUTTON
+    function handelLabel(event){
+        
+        if(event.target.value === "false"){
+            setCatering(false);
+            setChecked(false)
+        }
+        else{
+            setCatering(true);   
+            setChecked(true)
+        }
     }
 
-    
+    // FETCH 
+    const id = establishment.id
+    const url = BASE_URL + "establishments/" + id;
+    // GET FORM VALUES
+    function onSubmit(data){
+      
+        const updateEstablishment = {
+            name: data.name,
+            email: data.email,
+            prise: data.price,
+            maxGuests: data.guests,
+            lat: data.lat,
+            lng: data.lng,
+            image: data.image,
+            description: data.description,
+            selfCatering: catering
+        };
+
+        const options = { headers, method: "PATCH", body: JSON.stringify(updateEstablishment) };
+
+        fetch(url, options)
+            .then((r) => r.json())
+            .then((j) => console.log(j));
+            setValid(true);
+
+        // Update Hotel list    
+        if(hotelChange){
+                setHotelChange(false);
+        }
+        else{
+                setHotelChange(true);
+        }
+    }
+
+
 
     return(
         <Container>
@@ -115,13 +160,14 @@ function EstablishmentsDetails({establishment}){
 
                 <Form.Group className="establishmentForm__catering">
                 <Form.Label className="establishmentForm__catering--label">Self-Catering</Form.Label>
-                            <Form.Check 
+                <Form.Check 
                                 className="establishmentForm__catering--radio"
                                 name="catering"
                                 type="radio"
                                 label="YES"
-                                value={establishment.selfCatering}
-                                checked = {true}
+                                value = "true"
+                                checked={checked}
+                                onChange={handelLabel}
                                 ref={register}
                             />
 
@@ -130,9 +176,13 @@ function EstablishmentsDetails({establishment}){
                                 name="catering"
                                 type="radio"
                                 label="NO"
-                                value={establishment.selfCatering}
+                                value = "false"
+                                checked={!checked}
+                                onChange={handelLabel}
+                                
                                 ref={register}
                             />
+                            {errors.catering && <ErrorMessage>{errors.catering.message}</ErrorMessage>}
                 </Form.Group>
 
                 <Form.Group className="establishmentForm__latitude">
@@ -170,6 +220,7 @@ function EstablishmentsDetails({establishment}){
                                     ref={register} />
                     {errors.description && <ErrorMessage>{errors.description.message}</ErrorMessage>}
                 </Form.Group>
+                {valid && <ValidMessage><p>Establishment Updated</p></ValidMessage>}
                 <Row className="establishmentForm__row">
                     <Col xs={12} sm={6} className="establishmentForm__btn">
                     <Button className="establishmentForm__btn--save" type="submit">SAVE</Button> 

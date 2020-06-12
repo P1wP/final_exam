@@ -11,8 +11,8 @@ function DetailsBanner({image, alt}){
 
     return(
 
-        <div id="detailsBanner" className="container-fluid" >
-            <img id="detailsBanner__image" src={image} alt={alt} ></img>
+        <div id="detailsBanner" className="container-fluid" style={ImageStyle}>
+            
         </div>
 
     )

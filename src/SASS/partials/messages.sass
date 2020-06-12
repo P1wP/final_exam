@@ -57,23 +57,19 @@
     left: 3000px
     height: 0px
     overflow: hidden
-    
     transition: $transitionSpeed
+    & h2
+        color: $purple
+    & h2 
+        border-bottom: 1px solid $white
 .messageContainer
     &:hover ~ .messageContainer__message
         height: auto
         top: 0
-
-@media screen and ( max-width: 430px )
-    
-    .messages__list
-        background: blue
-        &:hover
-            .messagesMsg
-                background: red
-                opacity: 1
-                height: auto
-                transition: 1s
-    .messagesMsg
-        height: 0px
-        overflow: hidden
+    &__info
+        border-top: 1px solid $purple
+        &--from
+            width: 100%
+        &--date
+            width: 100%
+            text-align: right

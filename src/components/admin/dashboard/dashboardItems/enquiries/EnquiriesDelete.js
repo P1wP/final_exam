@@ -1,7 +1,9 @@
-import  React, { useState } from "react";
+import  React, { useState, useContext } from "react";
+import { AuthContext } from "../../../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import ErrorMessage from "../../../formValidation/ErrorMessage";
+import ValidMessage from "../../../formValidation/ValidMessage";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { BASE_URL, headers } from "../../../../../constants/API";
@@ -17,16 +19,26 @@ const schema = yup.object().shape({
 
 function EnquiriesDelete({msgId}){
     
+    const { hotelChange, setHotelChange } = useContext(AuthContext);
     const [ disabled, setDisabled ] = useState(true);
+    const [ valid, setValid ] = useState(true);
     const { register, handleSubmit, errors} = useForm({
         validationSchema: schema    
     });
 
     function onSubmit(data){
+        if(hotelChange){
+            setHotelChange(false);
+        }
+        else{
+            setHotelChange(true);
+        }
+
         let id = data.id;
         const url = BASE_URL + "enquiries/" + id;
         const options = { headers, method: "DELETE" };
         fetch(url, options);
+        setValid(true);
     }
     
     function CheckValue(e){
@@ -53,6 +65,7 @@ function EnquiriesDelete({msgId}){
                                 ref={register} />
                 {errors.id && <ErrorMessage>{errors.id.message}</ErrorMessage>}
             </Form.Group>
+            {valid && <ValidMessage><p>Enquirie Deleted</p></ValidMessage>}
             {disabled ? (
                     <Button className="deleteMsg__btn" type="submit" disabled>Delete</Button>
                 ):(

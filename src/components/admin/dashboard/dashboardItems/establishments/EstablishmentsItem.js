@@ -13,23 +13,16 @@ import EstablishmentCreateBtn from "./EstablishmentCreateBtn";
 import EstablishmentsCreate from "./EstablishmentsCreate";
 
 function EstablishmentsItem(){
-    const {create, clickedHotel, setClickedHotel } = useContext(AuthContext);
+    const {create, hotelChange, clickedHotel, setClickedHotel } = useContext(AuthContext);
     const [ establishments, setEstablishments ] = useState([]);
     const [ filterdhotel, setFilterdHotel ] = useState([]);
     const [ loading, setLoading ] = useState(true);
-    //const [ clickedHotel, setClickedHotel ] = useState(null);
 
     const FETCH_OPTIONS = {headers};
     const url = BASE_URL + "establishments";
-
+    
     // EDIT BELOW
     useEffect(()=>{
-        if(localStorage.getItem("hotels")){
-            setEstablishments(JSON.parse(localStorage.getItem("hotels")));
-            setFilterdHotel(JSON.parse(localStorage.getItem("hotels")));
-            setLoading(false);
-        }
-        else{
         fetch(url, FETCH_OPTIONS)
             .then(response => response.json())
             .then(json => { 
@@ -40,9 +33,7 @@ function EstablishmentsItem(){
             })
             .catch(error => console.log(error)) 
             .finally(() => setLoading(false));// END FETCH;
-
-        }// END IF ELSE
-    }, [url]);
+    },[hotelChange]);
     
 
     const searchHotels = function(e){
@@ -102,23 +93,9 @@ function EstablishmentsItem(){
     }
 
    
-
-    
-
-    // SHOW UNREAD
-        //GET LENGTH OF MESSAGES
-        //GET MESSAGES IN STORAGE
-            // NUMBER UNREAD === LENGTH - STORAGE
-        // CHECK IF MESSAGE ID IS IN STORAGE
-            // IF STORAGE
-                // FONT STYLE REGULAR
-            // ELSE
-                // FONTSYLE BOLD
-
-
     return(
         <Row>
-            <Col sm={8}>
+            <Col sm={8} md={8}>
                 <h2 className="establishments__heading">{create ? ("CREATE NEW"):("ESTABLISBMENTS")}</h2>
             </Col>
             {create ?(
@@ -128,7 +105,7 @@ function EstablishmentsItem(){
             
                // EDIT 
                <>
-            <Col sm={4} className="text-right">
+            <Col sm={4} md={4} className="text-right">
                 <EstablishmentCreateBtn />
             </Col>
             {!clickedHotel ? 

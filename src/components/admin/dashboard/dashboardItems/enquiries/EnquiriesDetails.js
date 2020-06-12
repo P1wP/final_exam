@@ -40,14 +40,9 @@ function EnquiriesDetails({message}){
                    
                 <Col sm={12} className="enquiriesMsg__sender">
                     <Row>
-                    <Col sm={6} className="enquiriesMsg__sender--hotel">
+                    <Col sm={12} className="enquiriesMsg__sender--hotel">
                         <p><strong>Hotel: </strong>{hotel.name}</p>
                     </Col>
-                    {isBrowser && 
-                        <Col sm={6} className="enquiriesMsg__sender--id text-right">
-                            <p><strong>Id: </strong>{message.id}</p>
-                        </Col>
-                    }
                     
                     <Col sm={12} className="enquiriesMsg__sender--date">
                         <p><strong>Date: </strong>{time(message.checkIn)} - {time(message.checkOut)}</p>

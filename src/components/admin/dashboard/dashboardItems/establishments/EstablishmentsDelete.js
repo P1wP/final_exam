@@ -1,4 +1,5 @@
-import  React, { useState } from "react";
+import  React, { useState, useContext } from "react";
+import { AuthContext } from "../../../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import ErrorMessage from "../../../formValidation/ErrorMessage";
@@ -16,13 +17,20 @@ const schema = yup.object().shape({
 
 
 function EstablishmentsDelete({EstId}){
-    
+    const { hotelChange, setHotelChange } = useContext(AuthContext);
     const [ disabled, setDisabled ] = useState(true);
     const { register, handleSubmit, errors} = useForm({
         validationSchema: schema    
     });
 
     function onSubmit(data){
+        if(hotelChange){
+            setHotelChange(false);
+        }
+        else{
+            setHotelChange(true);
+        }
+
         let id = data.id;
         const url = BASE_URL + "establishments/" + id;
         const options = { headers, method: "DELETE" };

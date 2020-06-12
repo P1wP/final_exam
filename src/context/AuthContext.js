@@ -34,6 +34,7 @@ const AuthContextProvider = ({ children }) =>{
     const [ props, setProps ] = useState([]);
     const [ clickedHotel, setClickedHotel ] = useState(null);
     const [ create, setCreate ] = useState(false);
+    const [ hotelChange, setHotelChange ] = useState(false);
 
 
     function toggleShow(x, msg, enq, est){
@@ -83,7 +84,7 @@ const AuthContextProvider = ({ children }) =>{
 
  
 
-    return <AuthContext.Provider value={{props, create, setCreate, clickedHotel, setClickedHotel, enq, est, setEst,  msg, closeAll, toggleShow, login, signIn, logout}}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{props, create, setCreate, hotelChange, setHotelChange, clickedHotel, setClickedHotel, enq, est, setEst,  msg, closeAll, toggleShow, login, signIn, logout}}>{children}</AuthContext.Provider>;
 }
 
 export { AuthContext, AuthContextProvider };

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 
 
 function EstablishmentCreateBtn(){
-    const { create, setCreate } = useContext(AuthContext);
+    const { setCreate } = useContext(AuthContext);
 
     function createNew(){
         setCreate(true)
