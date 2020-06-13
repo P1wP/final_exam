@@ -52,7 +52,7 @@ function GMap({lat, lng, name}){
                         <div className="marker__img">
                             <img className="marker__img--img" src={clickedMarker.image} alt={clickedMarker.name}></img>
                         </div>
-                        <Link className="marker__link" to={"/hotel/" + clickedMarker.id}>
+                        <Link className="marker__link" to={"/hotel/" + clickedMarker.id + "#detailsBanner"}>
                             <Button className="marker__link--btn">Details</Button>
                         </Link>
                       

@@ -54,7 +54,7 @@ function Location({hotel, address}){
     console.log(location);
     return(
 
-        <p><strong>Address:</strong> {location} </p>
+        <p><strong>Address:</strong><br/> {location} </p>
 
     );
     

@@ -1,4 +1,5 @@
-import  React, { useState }  from "react";
+import  React, { useState, useContext }  from "react";
+import { AuthContext } from "../../../context/AuthContext";
 import {BASE_URL, headers} from "../../../constants/API";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -37,12 +38,13 @@ const schema = yup.object().shape({
 });
 
 function EnquiryForm(id){
-
+    
+    const { hotelChange, setHotelChange } = useContext(AuthContext);
     const [validated, setValidated] = useState(false);
     const { register, handleSubmit, errors} = useForm({
         validationSchema: schema 
     });
-
+    console.log("Before submit: " + hotelChange);
     function onSubmit(data){
         // SEND DATA TO API
         console.log(id);
@@ -64,6 +66,15 @@ function EnquiryForm(id){
 
         console.log(sendData);
         setValidated(true);
+
+        // UPDATE ON ADMIN SIDE
+        if(hotelChange){
+            setHotelChange(false);
+        }
+        else{
+            setHotelChange(true);
+        }
+        console.log("after submit: " + hotelChange);
     }
 
     // RETURN THIS

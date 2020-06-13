@@ -25,6 +25,10 @@ function Details(){
     const FETCH_OPTIONS = {headers};
 
     useEffect(()=>{
+        // GO TO TOP OF PAGE
+        window.scrollTo(0, 0)
+
+
         // LOCAL?
         if(localStorage.getItem("hotels")){
             // GET HOTELS
