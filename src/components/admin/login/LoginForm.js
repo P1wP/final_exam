@@ -64,7 +64,7 @@ function LoginForm(){
 
                 <Form.Group className="loginForm__password">
                     <Form.Label className="loginForm__password--label">Password</Form.Label>
-                    <Form.Control className="loginForm__password--input" type="text" name="password" placeholder="Password" ref={register} />
+                    <Form.Control className="loginForm__password--input" type="password" name="password" placeholder="Password" ref={register} />
                     {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
                 </Form.Group>
         
