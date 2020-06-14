@@ -9,7 +9,6 @@ function EstablishmentCreateBtn(){
     function createNew(){
         setCreate(true)
     }
-
     return(
         <Button className="establishments__createBtn" type="button" onClick={createNew}>Create New</Button>
     )

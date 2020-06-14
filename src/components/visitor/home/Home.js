@@ -16,30 +16,19 @@ function Home(){
     const [loading, setLoading] = useState(true);
     const [filterdHotels, setFilterdHotels] = useState([]);
 
-    const hotelUrl = BASE_URL + "establishments";
-    const FETCH_OPTIONS = {headers};
-   
-
     useEffect(()=>{
-        if(localStorage.getItem("hotels")){
-            setHotels(JSON.parse(localStorage.getItem("hotels")));
-            setFilterdHotels(JSON.parse(localStorage.getItem("hotels")));
-            setLoading(false);
-        }
-        else{
-        fetch(hotelUrl, FETCH_OPTIONS)
+       const url = BASE_URL + "establishments";
+       const FETCH_OPTIONS = {headers};
+        fetch(url, FETCH_OPTIONS)
             .then(response => response.json())
             .then(json => { 
                 setHotels(json)
                 setFilterdHotels(json)
                 localStorage.setItem("hotels", JSON.stringify(json));
-                console.log(json)
             })
             .catch(error => console.log(error)) 
             .finally(() => setLoading(false));// END FETCH;
-
-        }// END IF ELSE
-    }, [hotelUrl]);
+    }, []);
     
 
     const searchHotels = function(e){
@@ -52,16 +41,15 @@ function Home(){
         }
         else{
             searchValue = e[0].toLowerCase();
-            console.log(searchValue);
         }
         //const searchValue = e.target.value.toLowerCase();
         
 
-        // CREATE NEW ARRAY FROM GAMES ARRAY
+        // CREATE NEW ARRAY FROM HOTELS ARRAY
         const filteredArray = hotels.filter(function(newHotel){
             const lowerCaseName = newHotel.name.toLowerCase();
 
-            //Check if the games name begins with search value
+            //Check if the hotels name begins with search value
             if(lowerCaseName.includes(searchValue)){
                 
                 // If it does return true
@@ -89,9 +77,6 @@ function Home(){
         );
     }
     
-    function enableBtn(){
-        console.log("HOVER");
-    }
 
 
     return(
@@ -99,7 +84,7 @@ function Home(){
         <div>
         {loading && <Spinner animation="border" className="spinner" />}
         <HomeBanner image={hotels[2].image}
-            search={<Search  HandleSearch={searchHotels} filterd={filterdHotels} all={hotels}/>}>
+            search={<Search  HandleSearch={searchHotels} filterd={filterdHotels} placeholder="Search by Name..."/>}>
         </HomeBanner>
         </div>
         
@@ -107,7 +92,7 @@ function Home(){
         <Row>
         {loading && <Spinner animation="border" className="spinner" />}
             {filterdHotels.map((hotel)=>(
-                <HotelDetails onHover={enableBtn} key={hotel.id} hotel={hotel}/>
+                <HotelDetails  key={hotel.id} hotel={hotel}/>
                     
                            
         ))}

@@ -1,10 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-    BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
-  } from "react-device-detect";
 import EnquiriesDelete from "./EnquiriesDelete";
 import { BASE_URL, headers } from "../../../../../constants/API";
 import Row from "react-bootstrap/Row";
@@ -23,9 +17,8 @@ function EnquiriesDetails({message}){
     fetch(url, options)
         .then((result) => result.json())
         .then((json) => setHotel(json));   
-    }, [message])
-    console.log(hotel)
-    console.log(message)
+    }, [id])
+    
 
     function time(date){
         const old = new Date(date);

@@ -13,6 +13,8 @@ function EstablishmentsCancel({classname}){
         else{
             setHotelChange(true);
         }
+        
+      
         closeAll(false, false, true)
         toggleShow( null, false, false, true);
         if(create){

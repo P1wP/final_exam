@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import FooterBS from "react-bootstrap/ModalFooter";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Col from "react-bootstrap/Col";
@@ -17,7 +16,7 @@ function Footer(){
                         <a 
                             target="_blank" 
                             rel="noopener noreferrer"  
-                            href="https://www.linkedin.com/in/joachim-s%C3%A6tre-a58876152/">
+                            href="https://www.twitter.com">
 
                                 <FontAwesomeIcon className="footer__icon" icon={['fab', 'twitter']} />
                         </a>
@@ -25,7 +24,7 @@ function Footer(){
                         <a 
                             target="_blank" 
                             rel="noopener noreferrer"  
-                            href="https://github.com/P1wP">
+                            href="https://www.instagram.com">
                                 
                                 <FontAwesomeIcon className="footer__icon" icon={['fab', 'instagram']} />
                                 
@@ -34,7 +33,7 @@ function Footer(){
                         <a 
                             target="_blank" 
                             rel="noopener noreferrer"  
-                            href="https://github.com/P1wP">
+                            href="https://www.facebook.com">
                                 
                                 <FontAwesomeIcon className="footer__icon" icon={['fab', 'facebook']} />
                                 

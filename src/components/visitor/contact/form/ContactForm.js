@@ -102,7 +102,7 @@ function ContactForm(){
             
             <Row>
                 <Col className="text-center contactForm__btn" sm={6}>
-                    <Button classname="contactForm__btn--submit" type="submit">Submit</Button>
+                    <Button className="contactForm__btn--submit" type="submit">Submit</Button>
                 </Col>
                 <Col className="text-center contactForm__btn" sm={6}>
                     <Button className="btn-danger contactForm__btn--cancel" onClick={cancel} >Cancel</Button>

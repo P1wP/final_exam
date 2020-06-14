@@ -14,10 +14,12 @@ function MessagesItem(){
     const [ messages, setMessages ] = useState([]);
     const { hotelChange,  toggleShow } = useContext(AuthContext);
 
-    const FETCH_OPTIONS = {headers};
-    const url = BASE_URL + "contacts";
+
     useEffect(() => {
         // FETCH MSGs
+        const FETCH_OPTIONS = {headers};
+        const url = BASE_URL + "contacts";
+
         fetch(url, FETCH_OPTIONS)
             .then(response => response.json())
             .then(json => { 
@@ -46,7 +48,7 @@ function MessagesItem(){
                         <div className="messages__list--info--email">DATE</div>
                     </Col>
                     {messages.map((message)=>(
-                        <Col sm={12} className="messages__list--item" onClick={() => toggleShow(message, true, false, false)}>
+                        <Col key={message.id} sm={12} className="messages__list--item" onClick={() => toggleShow(message, true, false, false)}>
                             <div className="messages__list--item--name">
                                 <p key={message.id}>{message.name}</p>
                             </div>

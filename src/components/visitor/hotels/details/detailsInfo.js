@@ -23,7 +23,7 @@ function DetailsInfo({hotel}){
                     <EnquiryModal className="testButton" hotel={hotel}></EnquiryModal>
                 </Col>
 
-                <Col className="DetailsInfo__Description " sm={12}>
+                <Col className="DetailsInfo__Description " sm={12   }>
                     <h3 className="DetailsInfo__Description--title">Description</h3>
                     <p className="DetailsInfo__Description--info">{hotel.description}</p>
                 </Col>
@@ -35,7 +35,7 @@ function DetailsInfo({hotel}){
 
                 <Col className="DetailsInfo__Breakfast" sm={12} md={4}>
                     <h3 className="DetailsInfo__Breakfast--title">Breakfast</h3>
-                    <p className="DetailsInfo__Breakfast--info">07 - 11pm</p>
+                    <p className="DetailsInfo__Breakfast--info">{hotel.selfCatering ? ("07 - 11pm"):("Not Included")}</p>
                 </Col>
 
                 <Col className="DetailsInfo__CheckIn" sm={12} md={4}>

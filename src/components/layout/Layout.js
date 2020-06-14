@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthContext";
-import ProtectedRoute from "../../context/ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 //PAGES  GOES HERE
 import Home from "../visitor/home/Home";
@@ -20,8 +20,8 @@ import Contact from "../visitor/contact/Contact";
 import Admin from "../admin/Admin";
 import Dashboard from "../admin/dashboard/Dashboard";
 import Details from "../visitor/hotels/details/Details";
-import EstablishmentDetails from "../admin/dashboard/dashboardItems/establishments/EstablishmentsDetails";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHamburger } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -45,7 +45,7 @@ function Layout(){
                     </h1>
                 ) }
                     
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle aria-controls="basic-navbar-nav"><FontAwesomeIcon className="navbar__hamburger" icon={faHamburger}/></Navbar.Toggle>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto navbar__btn">
                         {!login ? (

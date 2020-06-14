@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../../../../context/AuthContext";
 import {
-    BrowserView,
-    MobileView,
     isBrowser,
     isMobile
   } from "react-device-detect";
@@ -43,7 +41,7 @@ function Establishments (){
             </div>
             
         </div>
-        {isBrowser && <>{!hidden && <EstablishmentCreateBtn/>}</>}
+        {isBrowser && <>{!hidden && <div className="d-none d-md-none d-lg-block"><EstablishmentCreateBtn/></div>}</>}
         {isMobile && <>{!hidden && <EstablishmentsItem/>}</>}
         </>
 

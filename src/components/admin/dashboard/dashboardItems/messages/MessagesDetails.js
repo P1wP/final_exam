@@ -1,10 +1,4 @@
 import React from "react";
-import {
-    BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
-  } from "react-device-detect";
 import MessagesDelete from "./MessageDelete";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

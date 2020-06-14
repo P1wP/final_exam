@@ -26,11 +26,14 @@ const schema = yup.object().shape({
         .required("Password is required"),
     price: yup
         .number()
+        .typeError('Price must be a number')
+        .positive("Price must be more than 0")
         .min(10, "minimum price is 10$")
         .required("Price is required"),
     guests: yup
         .number()
-        .min(1, "Minimum number of guests MUST be ONE(1)")
+        .typeError('Guests must be a number')
+        .positive("Guests must be more than 0")
         .required("Maximum Guests is Required"),
     catering: yup
         .string()
@@ -45,7 +48,8 @@ const schema = yup.object().shape({
         .required("Longitude is required"),
     image: yup
         .string()
-        .required("Image is Required"),
+        .url()
+        .required("Specify image URL"),
     description: yup
         .string()
         .min(30, "Description must be minimum 30 character long")
@@ -212,7 +216,7 @@ function EstablishmentsCreate(){
 
                 <Form.Group className="establishmentForm__description">
                     <Form.Label className="establishmentForm__description--label">Description</Form.Label>
-                    <Form.Control   className="establishmentForm__description--input" 
+                    <textarea   className="establishmentForm__description--input" 
                                     type="text" 
                                     name="description"
                                     placeholder="Establishment Description"

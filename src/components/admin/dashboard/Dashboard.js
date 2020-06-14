@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
 import {
-    BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    isBrowser
   } from "react-device-detect";
 import { AuthContext } from "../../../context/AuthContext";
 import Row from "react-bootstrap/Row";

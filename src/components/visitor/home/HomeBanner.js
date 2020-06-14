@@ -1,6 +1,5 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import BannerHome from "../../../images/bannerHome.jpg";
 
 
 function HomeBanner({search, image}){

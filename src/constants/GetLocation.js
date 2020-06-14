@@ -24,7 +24,6 @@ function Location({hotel, address}){
         Geocode.fromLatLng(stringLat, stringLng).then(
             response => {
                 const address = response.results[0].formatted_address;
-                console.log(address);
                 setLocation(address);
             },
             error => {
@@ -38,7 +37,6 @@ function Location({hotel, address}){
         Geocode.fromAddress(address).then(
             response => {
                 const {lat, lng} = response.results[0].geometry.location;
-                console.log(lat, lng);
                 setLocation([lat, lng])
                 
             },
@@ -49,9 +47,9 @@ function Location({hotel, address}){
             
         )
     )
-    }, []);
+    }, [address, hotel]);
     
-    console.log(location);
+    
     return(
 
         <p><strong>Address:</strong><br/> {location} </p>

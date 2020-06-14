@@ -13,27 +13,29 @@ import EstablishmentCreateBtn from "./EstablishmentCreateBtn";
 import EstablishmentsCreate from "./EstablishmentsCreate";
 
 function EstablishmentsItem(){
-    const {create, hotelChange, clickedHotel, setClickedHotel } = useContext(AuthContext);
+    const {create, hotelChange, setHotelChange, clickedHotel, setClickedHotel } = useContext(AuthContext);
     const [ establishments, setEstablishments ] = useState([]);
     const [ filterdhotel, setFilterdHotel ] = useState([]);
     const [ loading, setLoading ] = useState(true);
 
-    const FETCH_OPTIONS = {headers};
-    const url = BASE_URL + "establishments";
     
-    // EDIT BELOW
-    useEffect(()=>{
+    
+    useEffect(() => {
+        
+        const FETCH_OPTIONS = {headers};
+        const url = BASE_URL + "establishments";
         fetch(url, FETCH_OPTIONS)
             .then(response => response.json())
             .then(json => { 
                 setEstablishments(json)
                 setFilterdHotel(json)
                 localStorage.setItem("hotels", JSON.stringify(json));
-                console.log(json)
             })
             .catch(error => console.log(error)) 
             .finally(() => setLoading(false));// END FETCH;
-    },[hotelChange]);
+            setHotelChange(false);
+        
+        }, [hotelChange, setHotelChange]);
     
 
     const searchHotels = function(e){
@@ -46,19 +48,18 @@ function EstablishmentsItem(){
         }
         else{
             searchValue = e[0].toLowerCase();
-            console.log(searchValue);
         }
         //const searchValue = e.target.value.toLowerCase();
         
 
-        // CREATE NEW ARRAY FROM GAMES ARRAY
+        // CREATE NEW ARRAY FROM HOTEL ARRAY
         const filteredArray = establishments.filter(function(newHotel){
             // NAME
             const lowerCaseName = newHotel.name.toLowerCase();
             // ID
             const lowerCaseId = newHotel.id.toLowerCase();
 
-            //Check if the games name begins with search value
+            //Check if the hotel name || id begins with search value
             if(lowerCaseName.includes(searchValue) || lowerCaseId.includes(searchValue)){
                 
                 // If it does return true
@@ -89,7 +90,6 @@ function EstablishmentsItem(){
 
     function viewHotel(hotel){
         setClickedHotel(hotel);
-        console.log(clickedHotel)
     }
 
    
@@ -112,7 +112,7 @@ function EstablishmentsItem(){
             ( // START CLICKED HOTEL
                 <>
             <Col sm={12} className="establishments__search">
-                <Search  HandleSearch={searchHotels} filterd={filterdhotel} all={establishments}/>
+                <Search  HandleSearch={searchHotels} filterd={filterdhotel} placeholder="Search by Name/Id.."/>
             </Col>
             
             <Col sm={12}>

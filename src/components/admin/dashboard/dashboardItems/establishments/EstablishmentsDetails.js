@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -14,6 +14,7 @@ import EstablishmentsCancel from "./EstablishmentsCancel";
 import { BASE_URL, headers } from "../../../../../constants/API";
 import ErrorMessage from "../../../formValidation/ErrorMessage";
 import ValidMessage from "../../../formValidation/ValidMessage";
+import { AuthContext } from "../../../../../context/AuthContext";
 
 
 const schema = yup.object().shape({
@@ -27,11 +28,18 @@ const schema = yup.object().shape({
         .required("Password is required"),
     price: yup
         .number()
+        .typeError('Price must be a number')
+        .positive("Price must be more than 0")
         .min(10, "minimum price is 10$")
         .required("Price is required"),
+    image: yup
+        .string()
+        .url()
+        .required("Specify image URL"),
     guests: yup
         .number()
-        .min(1, "Minimum number of guests MUST be ONE(1)")
+        .typeError('Guests must be a number')
+        .positive("Guests must be more than 0")
         .required("Maximum Guests is Required"),
     lat: yup
         .string()
@@ -48,7 +56,8 @@ const schema = yup.object().shape({
 
 function EstablishmentsDetails({establishment}){
 
-    const [hotelChange, setHotelChange, catering, setCatering ] = useState(true);
+    const { hotelChange, setHotelChange } = useContext(AuthContext);
+    const [catering, setCatering ] = useState(true);
     const [valid, setValid ] = useState(false);
     const [checked, setChecked ] = useState(establishment.selfCatering);
 
@@ -73,11 +82,11 @@ function EstablishmentsDetails({establishment}){
         
         if(event.target.value === "false"){
             setCatering(false);
-            setChecked(false)
+            setChecked(false);
         }
         else{
             setCatering(true);   
-            setChecked(true)
+            setChecked(true);
         }
     }
 
@@ -214,7 +223,7 @@ function EstablishmentsDetails({establishment}){
 
                 <Form.Group className="establishmentForm__description">
                     <Form.Label className="establishmentForm__description--label">Description</Form.Label>
-                    <Form.Control   className="establishmentForm__description--input" 
+                    <textarea  className="establishmentForm__description--input" 
                                     type="text" 
                                     name="description"
                                     ref={register} />
