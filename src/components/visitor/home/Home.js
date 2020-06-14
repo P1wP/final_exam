@@ -1,12 +1,13 @@
 import React, { useState, useEffect} from "react";
 import { BASE_URL, headers} from "../../../constants/API";
+
 import Spinner from "react-bootstrap/Spinner";
-import Search from "../search/Search";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import HotelDetails from "../hotels/HotelDetails";
 import HomeBanner from "./HomeBanner";
+import Search from "../search/Search";
 import Footer from "../footer/Footer";
 
 
@@ -32,33 +33,30 @@ function Home(){
     
 
     const searchHotels = function(e){
-        // VALUE FROM SEARCH INPUT
-        let searchValue;
+        let searchValue;  // VALUE FROM SEARCH INPUT
         
         if(e.length === 0){
             searchValue = null;
-            //setFilterdHotels(hotels);
         }
         else{
-            searchValue = e.toString().toLowerCase();
+            searchValue = e.toString().toLowerCase(); // VALUE FROM INPUT
         }
-        //const searchValue = e.target.value.toLowerCase();
-        
 
         // CREATE NEW ARRAY FROM HOTELS ARRAY
         const filteredArray = hotels.filter(function(newHotel){
             const lowerCaseName = newHotel.name.toLowerCase();
-
             //Check if the hotels name begins with search value
             if(lowerCaseName.includes(searchValue)){
-                
-                // If it does return true
+                 // If it does return true
                 return true;
             }
             // ELSE
             return false;
         });
+
         setFilterdHotels(filteredArray);
+        
+        // IF EMPTY SET ALL
         if(filteredArray.length === 0){
             setFilterdHotels(hotels);
         }
@@ -82,7 +80,7 @@ function Home(){
     return(
         <>
         <div>
-        {loading && <Spinner animation="border" className="spinner" />}
+        
         <HomeBanner image={hotels[2].image}
             search={<Search  HandleSearch={searchHotels} filterd={filterdHotels} placeholder="Search by Name..."/>}>
         </HomeBanner>

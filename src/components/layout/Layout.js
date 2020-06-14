@@ -3,7 +3,6 @@ import React, { useState, useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -31,6 +30,16 @@ function Layout(){
     const { login, logout } = useContext( AuthContext );
     const [show, setShow] = useState(false);
 
+    function navToggle(){
+        // IF TRUE
+        if(show){
+            setShow(false) // HIDE
+            return
+        }
+        // ELSE
+        setShow(true) // SHOW
+    }
+
     return (
         <>
         <Router>
@@ -46,7 +55,7 @@ function Layout(){
                 ) }
                     
                 <Navbar.Toggle 
-                    onClick={() => setShow(show ? false : "expanded")} 
+                    onClick={() => navToggle()} 
                     aria-controls="basic-navbar-nav">
                         <FontAwesomeIcon className="navbar__hamburger" icon={faHamburger}/>
                 </Navbar.Toggle>

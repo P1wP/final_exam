@@ -13,7 +13,7 @@ const AuthContextProvider = ({ children }) =>{
             password: "Password"
         }
         if(username === cred.username && password === cred.password){
-            localStorage.setItem("admin","admin");
+            sessionStorage.setItem("admin","admin");
             setLogin(true);
             return
         }
@@ -23,7 +23,7 @@ const AuthContextProvider = ({ children }) =>{
 
     function logout(){
         if(login){
-            localStorage.removeItem("admin");
+            sessionStorage.removeItem("admin");
             setLogin(false);
         }
         return

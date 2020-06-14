@@ -12,7 +12,7 @@ import {MapStyle}  from "../../../../constants/MapStyle";
 // LOCATION 
 // https://www.npmjs.com/package/react-geocode
 
-function GMap({lat, lng, name}){
+function GMap({lat, lng}){
     const [ clickedMarker, setClickedmarker] = useState(null);
     // GET ALL HOTELS
     const [ allHotels, setAllHotels ] = useState([]);
@@ -80,11 +80,11 @@ function GMap({lat, lng, name}){
     )
 };
 
-const MapWrapper = withScriptjs(withGoogleMap(GMap));
+const GetMap = withScriptjs(withGoogleMap(GMap));
 
-function Map({lng, lat, name}){
+function Map({lng, lat}){
     return(
-        <MapWrapper
+        <GetMap
             lat={lat}
             lng={lng}
             googleMapURL={'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=' + GKEY}
