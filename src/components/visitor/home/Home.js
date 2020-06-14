@@ -35,12 +35,12 @@ function Home(){
         // VALUE FROM SEARCH INPUT
         let searchValue;
         
-        if(e.length <= 0){
-            searchValue = "someThing";
+        if(e.length === 0){
+            searchValue = null;
             //setFilterdHotels(hotels);
         }
         else{
-            searchValue = e[0].toLowerCase();
+            searchValue = e.toString().toLowerCase();
         }
         //const searchValue = e.target.value.toLowerCase();
         

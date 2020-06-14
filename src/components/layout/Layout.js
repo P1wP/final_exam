@@ -1,5 +1,5 @@
 // NEEDED IMPORT FOR MENU
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
@@ -29,12 +29,12 @@ import { faHamburger } from '@fortawesome/free-solid-svg-icons';
 function Layout(){
 
     const { login, logout } = useContext( AuthContext );
-    
+    const [show, setShow] = useState(false);
 
     return (
         <>
         <Router>
-            <Navbar className="Navbar navbar-dark" expand="lg">
+            <Navbar className="Navbar navbar-dark" expand="sm" expanded={show}>
                 {!login ? (
                     <NavLink to="/" exact className="nav-link navbar__logo">
                     <Navbar.Brand className="navbar__logo--img"  title="Holidaze Logo"></Navbar.Brand>
@@ -45,25 +45,42 @@ function Layout(){
                     </h1>
                 ) }
                     
-                <Navbar.Toggle aria-controls="basic-navbar-nav"><FontAwesomeIcon className="navbar__hamburger" icon={faHamburger}/></Navbar.Toggle>
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle 
+                    onClick={() => setShow(show ? false : "expanded")} 
+                    aria-controls="basic-navbar-nav">
+                        <FontAwesomeIcon className="navbar__hamburger" icon={faHamburger}/>
+                </Navbar.Toggle>
+
+                <Navbar.Collapse 
+                    onMouseLeave={() => setShow(false)} 
+                    onClick={() => setShow(false)}  
+                    id="basic-navbar-nav" >
+                        
                     <Nav className="ml-auto navbar__btn">
                         {!login ? (
                             <>
-                              <NavLink to="/" exact className="nav-link navbar__btn--link">
-                            Home
-                        </NavLink>
-                        <NavLink to="/contact" exact className="nav-link navbar__btn--link">
-                            Contact
-                        </NavLink>
-                        <NavLink to="/admin" className="nav-link navbar__btn--link">
-                            Admin
-                        </NavLink>
+                            <NavLink to="/" exact className="nav-link navbar__btn--link">
+                                Home
+                            </NavLink>
+                            <NavLink to="/contact" exact className="nav-link navbar__btn--link">
+                                Contact
+                            </NavLink>
+                            <NavLink to="/admin" className="nav-link navbar__btn--link">
+                                Admin
+                            </NavLink>
                             </>
                         ) : (
-                        <NavLink to="/admin" className="nav-link" onClick={logout}>
-                            <Button>Sign Out</Button>
-                        </NavLink>
+                            <>
+                            <NavLink to="/" exact className="nav-link navbar__btn--link">
+                                Home
+                            </NavLink>
+                            <NavLink to="/dashboard" className="nav-link navbar__btn--link">
+                                DashBoard
+                            </NavLink>
+                            <NavLink to="/admin" className="nav-link navbar__btn--link" onClick={logout}>
+                                Sign Out
+                            </NavLink>
+                            </>
                         )}
                       
                      

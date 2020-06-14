@@ -5,7 +5,7 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) =>{
 
     // LOGIN
-    const [ login, setLogin ] = useState(false);
+    const [ login, setLogin ] = useState(localStorage.getItem("admin"));
     
     function signIn( username, password) {
         const cred = {
@@ -13,6 +13,7 @@ const AuthContextProvider = ({ children }) =>{
             password: "Password"
         }
         if(username === cred.username && password === cred.password){
+            localStorage.setItem("admin","admin");
             setLogin(true);
             return
         }
@@ -22,6 +23,7 @@ const AuthContextProvider = ({ children }) =>{
 
     function logout(){
         if(login){
+            localStorage.removeItem("admin");
             setLogin(false);
         }
         return

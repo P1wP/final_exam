@@ -1,5 +1,5 @@
-import React , { useState }from "react";
-import {GKEY} from "../../../../constants/API";
+import React , { useState, useEffect }from "react";
+import {GKEY, BASE_URL, headers} from "../../../../constants/API";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
@@ -15,7 +15,22 @@ import {MapStyle}  from "../../../../constants/MapStyle";
 function GMap({lat, lng, name}){
     const [ clickedMarker, setClickedmarker] = useState(null);
     // GET ALL HOTELS
-    const allHotels = JSON.parse(localStorage.getItem("hotels"));
+    const [ allHotels, setAllHotels ] = useState([]);
+
+    useEffect(()=>{
+    
+        const url = BASE_URL + "establishments";
+        const FETCH_OPTIONS = {headers};
+        
+        fetch(url, FETCH_OPTIONS)
+            .then(response => response.json())
+            .then(json => { 
+                setAllHotels(json)
+            })
+            .catch(error => console.log(error));// END FETCH;
+        
+        
+    }, []);
 
     return(
         <div className="map">

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { BASE_URL, headers} from "../../../../constants/API";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
-
+import { useParams } from "react-router-dom";
 
 import DetailsBanner from "./DetailsBanner";
 import DetailsInfo from "./detailsInfo";
@@ -14,13 +14,10 @@ function Details(){
     const [ hotel, setHotel ] = useState([]);
     const [loading, setLoading] = useState(true);
     
+     // GET ID FROM URL
+    let {id} = useParams();
 
     useEffect(()=>{
-         // GET URL
-        const urlPath = window.location.pathname.split("/");
-        // GET ID FROM URL
-        const id = urlPath[urlPath.length-1];
-
         // GO TO TOP OF PAGE
         window.scrollTo(0, 0)
 
@@ -36,7 +33,7 @@ function Details(){
             .finally(() => setLoading(false));// END FETCH;
         
         
-    }, []);
+    }, [id]);
 
     if (loading) {
         
