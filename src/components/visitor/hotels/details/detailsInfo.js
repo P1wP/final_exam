@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 
 import Location from "../../../../constants/GetLocation";
 
-//import Map from "./Map";
+import Map from "./Map";
 import EnquiryModal from "../../modals/EnquiryModal";
 import DetailsUtil from "./DetailsUtil";
 
@@ -59,8 +59,8 @@ function DetailsInfo({hotel}){
                 </Col>
                 <Col className="DetailsInfo__Map" sm={12} md={8}>
                         {/*
-                        not shure if plagarisim removed to be safe
-                        <Map lat={hotel.lat} lng={hotel.lng}/> */}
+                        not shure if plagarisim removed to be safe*/}
+                        <Map lat={hotel.lat} lng={hotel.lng}/> 
                 </Col>
                 <Col sm={12}>
                     <EnquiryModal hotel={hotel}></EnquiryModal>

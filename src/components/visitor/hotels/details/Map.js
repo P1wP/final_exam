@@ -6,7 +6,6 @@ import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'reac
 import {MapStyle}  from "../../../../constants/MapStyle";
 // https://tomchentw.github.io/react-google-maps/
 
-// ROMEVE LATER
 // https://www.youtube.com/watch?v=Pf7g32CwX_s
 
 // LOCATION 
