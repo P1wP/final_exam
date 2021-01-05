@@ -23,13 +23,13 @@ function EstablishmentsItem(){
     useEffect(() => {
         
         const FETCH_OPTIONS = {headers};
-        const url = BASE_URL + "establishments";
+        const url = BASE_URL;
         fetch(url, FETCH_OPTIONS)
             .then(response => response.json())
             .then(json => { 
                 setEstablishments(json)
                 setFilterdHotel(json)
-                localStorage.setItem("hotels", JSON.stringify(json));
+                localStorage.setItem("hotelsTWO", JSON.stringify(json));
             })
             .catch(error => console.log(error)) 
             .finally(() => setLoading(false));// END FETCH;

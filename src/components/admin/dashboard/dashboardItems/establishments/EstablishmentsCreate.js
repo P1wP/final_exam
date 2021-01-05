@@ -102,7 +102,7 @@ function EstablishmentsCreate(){
         };
         console.log(newEstablishment)
         
-        const url = BASE_URL + "establishments";
+        const url = BASE_URL;
         const options = { headers, method: "POST", body: JSON.stringify(newEstablishment) };
 
         // send every

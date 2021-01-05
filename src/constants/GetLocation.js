@@ -14,6 +14,7 @@ function minDigits(number) {
 
 function Location({hotel, address}){
     Geocode.setApiKey(GKEY);
+    console.log(hotel.lat)
 
     const [ location, setLocation ] = useState();
     useEffect(()=>{

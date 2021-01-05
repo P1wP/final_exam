@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { BASE_URL, headers} from "../../../constants/API";
+import { BASE_URL, headers, StaticData} from "../../../constants/API";
 
 import Spinner from "react-bootstrap/Spinner";
 import Row from "react-bootstrap/Row";
@@ -17,18 +17,25 @@ function Home(){
     const [loading, setLoading] = useState(true);
     const [filterdHotels, setFilterdHotels] = useState([]);
 
+    
     useEffect(()=>{
-       const url = BASE_URL + "establishments";
+        
+       const url = BASE_URL;
+       //const url = BASE_URL + "establishments";
        const FETCH_OPTIONS = {headers};
         fetch(url, FETCH_OPTIONS)
             .then(response => response.json())
             .then(json => { 
+                console.log(json)
                 setHotels(json)
                 setFilterdHotels(json)
-                localStorage.setItem("hotels", JSON.stringify(json));
+                localStorage.setItem("hotelsTWO", JSON.stringify(json));
             })
             .catch(error => console.log(error)) 
             .finally(() => setLoading(false));// END FETCH;
+        
+
+            
     }, []);
     
 
@@ -41,7 +48,7 @@ function Home(){
         else{
             searchValue = e.toString().toLowerCase(); // VALUE FROM INPUT
         }
-
+       
         // CREATE NEW ARRAY FROM HOTELS ARRAY
         const filteredArray = hotels.filter(function(newHotel){
             const lowerCaseName = newHotel.name.toLowerCase();
@@ -75,7 +82,7 @@ function Home(){
         );
     }
     
-
+    
 
     return(
         <>

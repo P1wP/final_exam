@@ -13,6 +13,8 @@ function Details(){
 
     const [ hotel, setHotel ] = useState([]);
     const [loading, setLoading] = useState(true);
+    const hotels = JSON.parse(localStorage.getItem("hotelsTWO"));
+   
     
      // GET ID FROM URL
     let {id} = useParams();
@@ -21,6 +23,7 @@ function Details(){
         // GO TO TOP OF PAGE
         window.scrollTo(0, 0)
 
+        /*
         const url = BASE_URL + "establishments/" + id;
         const FETCH_OPTIONS = {headers};
         
@@ -31,7 +34,14 @@ function Details(){
             })
             .catch(error => console.log(error)) 
             .finally(() => setLoading(false));// END FETCH;
-        
+        */
+       
+       var newHotel =  hotels.filter(function(hotId) {
+        return hotId.id == id;
+        });
+        setHotel(newHotel[0]);
+        console.log(newHotel)
+        setLoading(false);
         
     }, [id]);
 

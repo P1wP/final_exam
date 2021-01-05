@@ -12,13 +12,14 @@ import {MapStyle}  from "../../../../constants/MapStyle";
 // https://www.npmjs.com/package/react-geocode
 
 function GMap({lat, lng}){
+    console.log("MAP" + lat + lng)
     const [ clickedMarker, setClickedmarker] = useState(null);
     // GET ALL HOTELS
     const [ allHotels, setAllHotels ] = useState([]);
 
     useEffect(()=>{
     
-        const url = BASE_URL + "establishments";
+        const url = BASE_URL;
         const FETCH_OPTIONS = {headers};
         
         fetch(url, FETCH_OPTIONS)

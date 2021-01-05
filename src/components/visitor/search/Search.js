@@ -9,10 +9,10 @@ function Search({HandleSearch, filterd, placeholder}){
     const hotels = [];
     for(let i = 0; i< filterd.length; i++){
         hotels.push(filterd[i].name)
-        hotels.push(filterd[i].id)
+        //hotels.push(filterd[i].id)
     }
     
-
+    console.log(hotels.name);
     return(
         <div id="searchContainer">
 
@@ -21,7 +21,7 @@ function Search({HandleSearch, filterd, placeholder}){
                 placeholder={placeholder}
                 options={hotels}
                 maxVisible={2}
-                labelKey={hotels.name}
+                labelKey={hotels}
                 onChange={(value) => HandleSearch(value)}
                 onInputChange={(value) => HandleSearch(value)}
                 shouldSelect={true}

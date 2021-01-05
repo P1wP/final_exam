@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import EnquiryModal from "../modals/EnquiryModal";
 
 function HotelDetails({hotel}){
-    
+console.log("Details")
     const ImageStyle = {
         backgroundImage: 'url(' + hotel.image + ')',
     };
