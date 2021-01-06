@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
-import { BASE_URL, headers, StaticData} from "../../../constants/API";
+import { BASE_URL, headers } from "../../../constants/API";
+
 
 import Spinner from "react-bootstrap/Spinner";
 import Row from "react-bootstrap/Row";
@@ -18,6 +19,10 @@ function Home(){
     const [filterdHotels, setFilterdHotels] = useState([]);
 
     
+      
+  
+    
+   
     useEffect(()=>{
         
        const url = BASE_URL;
