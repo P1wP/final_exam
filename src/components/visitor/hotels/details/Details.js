@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { BASE_URL, headers} from "../../../../constants/API";
+//import { BASE_URL, headers} from "../../../../constants/API";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import { useParams } from "react-router-dom";
@@ -37,7 +37,7 @@ function Details(){
         */
        
        var newHotel =  hotels.filter(function(hotId) {
-        return hotId.id == id;
+        return hotId.id === id;
         });
         setHotel(newHotel[0]);
         console.log(newHotel)
